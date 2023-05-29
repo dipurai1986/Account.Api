@@ -87,7 +87,7 @@ namespace AccountApiIntegrationTestsNamespace
             };
 
             // Act
-           var  result = await _httpClient.PostAsJsonAsync("/api/Account/Deposit", depositcommand);
+           var  result = await _httpClient.PostAsJsonAsync("/api/Transaction/Deposit", depositcommand);
 
             // Assert
             Xunit.Assert.False(result.IsSuccessStatusCode);
@@ -121,7 +121,7 @@ namespace AccountApiIntegrationTestsNamespace
             };
 
             // Act
-            var result = await _httpClient.PostAsJsonAsync("/api/Account/Deposit", depositcommand);
+            var result = await _httpClient.PostAsJsonAsync("/api/Transaction/Deposit", depositcommand);
 
             // Assert
             result.EnsureSuccessStatusCode();
@@ -155,7 +155,7 @@ namespace AccountApiIntegrationTestsNamespace
             };
 
             // Act
-            var result = await _httpClient.PostAsJsonAsync("/api/Account/Deposit", depositcommand);
+            var result = await _httpClient.PostAsJsonAsync("/api/Transaction/Deposit", depositcommand);
             // Arrange
             var witcommand = new WithdrawCommand
             {
@@ -165,7 +165,7 @@ namespace AccountApiIntegrationTestsNamespace
             };
 
             // Act
-            var witresponse = await _httpClient.PostAsJsonAsync("/api/Account/Withdraw", witcommand);
+            var witresponse = await _httpClient.PostAsJsonAsync("/api/Transaction/Withdraw", witcommand);
 
             // Assert
             witresponse.EnsureSuccessStatusCode();
@@ -200,7 +200,7 @@ namespace AccountApiIntegrationTestsNamespace
             };
 
         
-            await _httpClient.PostAsJsonAsync("/api/Account/Deposit", depositcommand);
+            await _httpClient.PostAsJsonAsync("/api/Transaction/Deposit", depositcommand);
          
             var witcommand = new WithdrawCommand
             {
@@ -210,7 +210,7 @@ namespace AccountApiIntegrationTestsNamespace
             };
 
      
-            var witresponse = await _httpClient.PostAsJsonAsync("/api/Account/Withdraw", witcommand);
+            var witresponse = await _httpClient.PostAsJsonAsync("/api/Transaction/Withdraw", witcommand);
 
        
             Xunit.Assert.False(witresponse.IsSuccessStatusCode);

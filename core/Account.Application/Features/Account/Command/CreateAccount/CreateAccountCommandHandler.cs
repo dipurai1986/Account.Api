@@ -1,4 +1,5 @@
-﻿using Account.Domain;
+﻿using Account.Application.Exceptions;
+using Account.Domain;
 using Account.Infrastructure.Contracts;
 using Account.Infrastructure.Repositories;
 using MediatR;
@@ -17,6 +18,13 @@ namespace Account.Application.Features.Account.Command.CreateAccount
 
         public async Task<List<UserAccount>> Handle(CreateAccountCommand request, CancellationToken cancellationToken)
         {
+            if (request.initial_balance<100)
+            {
+               var valresult= new FluentValidation.Results.ValidationResult();
+               
+                throw new BadRequestException("Invalid Amount", valresult);
+
+            }
             var account = new UserAccount()
             {
                 AccountId = new Random().Next(99999),

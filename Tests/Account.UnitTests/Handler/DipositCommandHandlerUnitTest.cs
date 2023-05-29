@@ -43,6 +43,28 @@ namespace Account.UnitTests.Handler
         }
 
         [Fact]
+        public async Task Handle_NegativeDepositCommand_ValidationErrors()
+        {
+            // Arrange
+            var accountRepository = Substitute.For<IAccountRepository>();
+            var handler = new DipositCommandHandler(accountRepository);
+            var command = new DepositCommand
+            {
+                UserId = 1,
+                AccountId = 123,
+                Amount = -100
+            };
+            accountRepository.GetAccountByAccountId(command.UserId, command.AccountId)
+           .Returns(Task.FromResult(new UserAccount() { AccountId = 100, Balance = 200, AccountNumber = "ACC-12345" }));
+            //accountRepository.DepositAccount(command.)
+            // Act
+            await Assert.ThrowsAsync<BadRequestException>(() => handler.Handle(command, CancellationToken.None));
+
+            // Assert
+      
+        }
+
+        [Fact]
         public async Task Handle_InvalidDepositCommand_ThrowsBadRequestException()
         {
             // Arrange

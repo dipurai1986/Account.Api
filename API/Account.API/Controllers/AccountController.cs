@@ -35,18 +35,7 @@ namespace Account.API.Controllers
             var response = await _mediator.Send(request);
             return Ok(response);
         }
-        [HttpPost("Deposit")]
-        public async Task<ActionResult> Deposit(DepositCommand depositCommand )
-        {         
-            var response = await _mediator.Send(depositCommand);
-            return Ok(response);
-        }
-        [HttpPost("Withdraw")]
-        public async Task<ActionResult> Withdraw(WithdrawCommand withdrawCommand)
-        {
-            var response = await _mediator.Send(withdrawCommand);
-            return Ok(response);
-        }
+     
         [HttpDelete("DeleteAccount/{userId}/{AccountId}")]
         public async Task<ActionResult> DeleteAccount(int userId,int AccountId)
         {
