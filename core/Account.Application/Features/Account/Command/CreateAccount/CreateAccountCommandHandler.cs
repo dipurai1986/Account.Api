@@ -21,7 +21,7 @@ namespace Account.Application.Features.Account.Command.CreateAccount
             {
                 AccountId = new Random().Next(99999),
                 AccountNumber = GenerateAccountNumber(),
-                Balance = 100
+                Balance = request.initial_balance
             };
 
             return await _accountRepository.CreateAccount(request.UserId, account);

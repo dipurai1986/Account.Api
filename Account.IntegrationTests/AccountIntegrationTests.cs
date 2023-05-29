@@ -34,7 +34,8 @@ namespace AccountApiIntegrationTestsNamespace
             // Arrange
             var command = new CreateAccountCommand
             {
-                UserId = 1 // Provide the desired user ID
+                UserId = 1,
+                initial_balance=100
             };
 
             // Act
@@ -64,7 +65,8 @@ namespace AccountApiIntegrationTestsNamespace
         {
             var command = new CreateAccountCommand
             {
-                UserId = 1 // Provide the desired user ID
+                UserId = 1,
+                initial_balance = 100
             };
 
             // Act
@@ -97,7 +99,8 @@ namespace AccountApiIntegrationTestsNamespace
         {
             var command = new CreateAccountCommand
             {
-                UserId = 1 // Provide the desired user ID
+                UserId = 1,
+                initial_balance = 100
             };
 
             // Act
@@ -130,7 +133,8 @@ namespace AccountApiIntegrationTestsNamespace
         {
             var command = new CreateAccountCommand
             {
-                UserId = 1 
+                UserId = 1,
+                initial_balance = 100
             };
 
             // Act
@@ -174,7 +178,8 @@ namespace AccountApiIntegrationTestsNamespace
         {
             var command = new CreateAccountCommand
             {
-                UserId = 1
+                UserId = 1,
+                initial_balance = 100
             };
 
             // Act
@@ -215,22 +220,23 @@ namespace AccountApiIntegrationTestsNamespace
         [Fact]
         public async Task DeleteAccount_ShouldReturnSuccess()
         {
-            var userId = 1;
+           
 
             var command = new CreateAccountCommand
             {
-                UserId = 1
+                UserId = 1,
+                initial_balance = 100
             };
 
             await _httpClient.PostAsJsonAsync("/api/Account/CreateAccount", command);
 
-            var accountResponse = await _httpClient.GetAsync($"/api/Account/GetAccounts/{userId}");
+            var accountResponse = await _httpClient.GetAsync($"/api/Account/GetAccounts/{command.UserId}");
 
             var accountresult = JsonConvert.DeserializeObject<List<UserAccount>>(await accountResponse.Content.ReadAsStringAsync());
            
 
 
-            var deleteResponse = await _httpClient.DeleteAsync($"/api/Account/DeleteAccount/{userId}/{accountresult[0].AccountId}");
+            var deleteResponse = await _httpClient.DeleteAsync($"/api/Account/DeleteAccount/{command.UserId}/{accountresult[0].AccountId}");
 
        
             deleteResponse.EnsureSuccessStatusCode();

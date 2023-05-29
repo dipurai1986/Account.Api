@@ -11,5 +11,6 @@ namespace Account.Application.Features.Account.Command.CreateAccount
     public class CreateAccountCommand : IRequest<List<UserAccount>>
     {
         public int UserId { get; set; }
+        public decimal initial_balance { get; set; }
     }
 }
