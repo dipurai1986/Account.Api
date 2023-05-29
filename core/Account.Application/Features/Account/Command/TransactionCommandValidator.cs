@@ -12,17 +12,18 @@ namespace Account.Application.Features.Account.Command
    
         public abstract class TransactionCommandValidator<T> : AbstractValidator<T>
         {
-            protected IAccountRepository userRepository;
+            protected IAccountRepository _accRepository;
 
-            public TransactionCommandValidator(IAccountRepository userRepository)
+            public TransactionCommandValidator(IAccountRepository accRepository)
             {
-                this.userRepository = userRepository;
+                this._accRepository = accRepository;
 
                 RuleFor(p => GetPropertyValue(p, "AccountId"))
                     .NotEmpty().WithMessage(MessageConstant.ACCOUNT_REQUIRE_MESSAGE);
+           
 
 
-                RuleFor(p => GetPropertyValue(p, "Amount"))
+            RuleFor(p => GetPropertyValue(p, "Amount"))
                     .NotEmpty().WithMessage(MessageConstant.AMOUNT_REQUIRE_MESSAGE);
 
 
@@ -35,7 +36,9 @@ namespace Account.Application.Features.Account.Command
                 var property = typeof(T).GetProperty(propertyName);
                 return property?.GetValue(obj);
             }
-        }
+              
+    }
+
 
     
 

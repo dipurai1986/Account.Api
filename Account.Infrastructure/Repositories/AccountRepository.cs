@@ -47,7 +47,7 @@ namespace Account.Infrastructure.Repositories
 
         public Task<UserAccount> GetAccountByAccountId(int userid, int accountId)
         {
-            return Task.FromResult(users.FirstOrDefault(u => u.UserId == userid).UserAccount.FirstOrDefault(useracc => useracc.AccountId == accountId));
+            return Task.FromResult(users.FirstOrDefault(u => u.UserId == userid)?.UserAccount?.FirstOrDefault(useracc => useracc.AccountId == accountId));
         }
 
         public Task DepositAccount(int userid, int accountId, decimal amount)

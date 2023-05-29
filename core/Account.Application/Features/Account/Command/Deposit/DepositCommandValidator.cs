@@ -16,9 +16,21 @@ namespace Account.Application.Features.Account.Command.Deposit
         private IAccountRepository userRepository;
         public DepositCommandValidator(IAccountRepository userRepository) : base(userRepository)
             {
-         
-                RuleFor(p => p.Amount).LessThanOrEqualTo(TransactionConstant.INVALID_MAX_TRANSACTION_AMOUNT).WithMessage(MessageConstant.MAX_AMOUNT_PER_TRANSACTION_LIMIT_MESSAGGE+TransactionConstant.INVALID_MAX_TRANSACTION_AMOUNT);
+
+            RuleFor(p => p)
+                       .MustAsync((command, cancellationToken) => isValidAccountID(command.UserId, command.AccountId))
+                       .WithMessage(MessageConstant.ACCOUNT_INVALID_MESSAGE);
+            RuleFor(p => p.Amount).LessThanOrEqualTo(TransactionConstant.INVALID_MAX_TRANSACTION_AMOUNT).WithMessage(MessageConstant.MAX_AMOUNT_PER_TRANSACTION_LIMIT_MESSAGGE+TransactionConstant.INVALID_MAX_TRANSACTION_AMOUNT);
             }
+        private async Task<bool> isValidAccountID(int userId, int accountId)
+        {
+            var userAccount = await _accRepository.GetAccountByAccountId(userId, accountId);
+            if (userAccount == null)
+            {
+                return false;
+            }
+            return true;
+        }
     }
     
 }
