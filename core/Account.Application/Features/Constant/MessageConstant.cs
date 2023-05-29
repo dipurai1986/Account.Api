@@ -14,6 +14,6 @@ namespace Account.Application.Features.Constant
         public static string INVALID_AMOUNT_MESSAGE = "Invalid Amount";
         public static string AMOUNT_REQUIRE_MESSAGE = "Amount must be required";
         public static string ACCOUNT_REQUIRE_MESSAGE = "Account Id must be required";
-   
+        public static string ACCOUNT_INVALID_MESSAGE = "Invalid Account Id";
     }
 }
