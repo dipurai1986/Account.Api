@@ -32,7 +32,8 @@ namespace Account.UnitTests.Handler
                 AccountId = 123,
                 Amount = 100
             };
-     
+            accountRepository.GetAccountByAccountId(command.UserId, command.AccountId)
+           .Returns(Task.FromResult(new UserAccount() { AccountId = 100, Balance = 200, AccountNumber = "ACC-12345" }));
             //accountRepository.DepositAccount(command.)
             // Act
             await handler.Handle(command, CancellationToken.None);
