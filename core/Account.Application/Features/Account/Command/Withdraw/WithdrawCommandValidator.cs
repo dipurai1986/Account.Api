@@ -21,13 +21,13 @@ namespace Account.Application.Features.Account.Command.Withdraw
             this._userRepository = userRepository;
             RuleFor(p => p)
                 .MustAsync((command, cancellationToken) => IsAmountGreaterThanBalance(command.UserId, command.AccountId, command.Amount))
-                .WithMessage("Insufficient balance for withdrawal");
+                .WithMessage(MessageConstant.BALANCE_LIMIT_MESSAGE);
             RuleFor(p => p)
               .MustAsync((command, cancellationToken) => IsWithdrawAmountValid(command.UserId, command.AccountId, command.Amount))
-              .WithMessage("You Cant Withdraw this much Amount");
+              .WithMessage(MessageConstant.MAX_AMOUNT_PER_TRANSACTION_BALANCE_PERCENT_MESSAGE); //need to move to constant
 
             RuleFor(p => p.Amount)
-                .Must(amount => amount > 0).WithMessage("Invalid Amount");
+                .Must(amount => amount > 0).WithMessage(MessageConstant.INVALID_AMOUNT_MESSAGE);
         }
 
         private async Task<bool> IsAmountGreaterThanBalance(int userId, int accountId, decimal amount)

@@ -17,7 +17,7 @@ namespace Account.Application.Features.Account.Command.Deposit
         public DepositCommandValidator(IAccountRepository userRepository) : base(userRepository)
             {
          
-                RuleFor(p => p.Amount).LessThanOrEqualTo(TransactionConstant.INVALID_MAX_TRANSACTION_AMOUNT).WithMessage("Invalid Amount it Must not b More Than "+TransactionConstant.INVALID_MAX_TRANSACTION_AMOUNT);
+                RuleFor(p => p.Amount).LessThanOrEqualTo(TransactionConstant.INVALID_MAX_TRANSACTION_AMOUNT).WithMessage(MessageConstant.MAX_AMOUNT_PER_TRANSACTION_LIMIT_MESSAGGE+TransactionConstant.INVALID_MAX_TRANSACTION_AMOUNT);
             }
     }
     

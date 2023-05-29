@@ -19,15 +19,15 @@ namespace Account.Application.Features.Account.Command
                 this.userRepository = userRepository;
 
                 RuleFor(p => GetPropertyValue(p, "AccountId"))
-                    .NotEmpty().WithMessage("Account Id must be required");
+                    .NotEmpty().WithMessage(MessageConstant.ACCOUNT_REQUIRE_MESSAGE);
 
 
                 RuleFor(p => GetPropertyValue(p, "Amount"))
-                    .NotEmpty().WithMessage("Amount must be required");
+                    .NotEmpty().WithMessage(MessageConstant.AMOUNT_REQUIRE_MESSAGE);
 
 
                 RuleFor(p => p)
-                    .Must(p => (decimal)GetPropertyValue(p, "Amount") > 0).WithMessage("Invalid Amount");
+                    .Must(p => (decimal)GetPropertyValue(p, "Amount") > 0).WithMessage(MessageConstant.INVALID_AMOUNT_MESSAGE);
         }
 
             private object GetPropertyValue(T obj, string propertyName)
