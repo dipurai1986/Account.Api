@@ -1,4 +1,5 @@
-﻿using Account.Application.Features.Account.Command.CreateAccount;
+﻿using Account.API.Middleware;
+using Account.Application.Features.Account.Command.CreateAccount;
 using Account.Application.Features.Account.Command.DeleteAccount;
 using Account.Application.Features.Account.Command.Deposit;
 using Account.Application.Features.Account.Command.Withdraw;
@@ -6,29 +7,41 @@ using Account.Application.Features.Account.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 using System.Threading.Tasks;
 
 namespace Account.API.Controllers
 {
-    [Route("api/[controller]")]
+    [ApiVersion("4.0")]
+   
+    [Route("api/v{version:apiVersion}/[controller]")]
+    //[Route("api/[controller]")]
     [ApiController]
     public class AccountController : ControllerBase
     {
+        /////////////200-ok
+        ///400 bad request 
+        ///401 Unauthorized 
+        ///403 Forbidden
+        ///404 Not Found
         private readonly IMediator _mediator;
+        private readonly ILogger<AccountController> _logger;
 
-        public AccountController(IMediator mediator)
+        public AccountController(IMediator mediator, ILogger<AccountController> logger)
         {
             _mediator = mediator;
+            _logger = logger;
         }
-
-        [HttpPost("CreateAccount")] 
+        [CustomFilter]
+        [HttpPost("CreateAccount")]       
         public async Task<ActionResult> CreateAccount(CreateAccountCommand userRequest)
         {
+            _logger.LogInformation("Receive Request");
             var response = await _mediator.Send(userRequest);
             return Ok(response);
         }
-
-        [HttpGet("GetAccounts/{userId}")]
+        [CustomFilter]
+        [HttpGet("GetAccounts/{userId}")] 
         public async Task<ActionResult> GetAccounts(int userId)
         {
             var request = new GetAccountRequest() { userid = userId };

@@ -36,10 +36,11 @@ namespace Account.Application.Features.Account.Command
                 var property = typeof(T).GetProperty(propertyName);
                 return property?.GetValue(obj);
             }
-              
+    
+       
     }
 
 
-    
+
 
 }

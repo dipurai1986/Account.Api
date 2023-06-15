@@ -23,7 +23,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{15AF737F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Account.UnitTests", "Tests\Account.UnitTests\Account.UnitTests.csproj", "{EEBF4736-F0E7-498C-9B33-AE9E164C0276}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Account.IntegrationTests", "Account.IntegrationTests\Account.IntegrationTests.csproj", "{9F7BD124-6503-4E69-A908-3038CE38EF19}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Account.IntegrationTests", "Account.IntegrationTests\Account.IntegrationTests.csproj", "{9F7BD124-6503-4E69-A908-3038CE38EF19}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2447E720-40F8-40E1-A4CF-BE6949458A60}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
